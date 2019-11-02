@@ -1,4 +1,4 @@
-package com.permanovd.infrastructure.xsd_validation;
+package com.permanovd.infrastructure;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
