@@ -11,7 +11,7 @@ import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 
-class XsdValidationService {
+public class XsdValidationService {
     boolean validate(File xmlFile, File schemaFile) throws SAXException, IOException {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Source xmlFileSource = new StreamSource(xmlFile);
