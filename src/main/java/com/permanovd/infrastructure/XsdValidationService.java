@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class XsdValidationService {
-    public boolean validate(File xmlFile, File schemaFile) throws SAXException, IOException {
+    boolean validate(File xmlFile, File schemaFile) throws SAXException, IOException {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Source xmlFileSource = new StreamSource(xmlFile);
         Schema schema = schemaFactory.newSchema(schemaFile);
