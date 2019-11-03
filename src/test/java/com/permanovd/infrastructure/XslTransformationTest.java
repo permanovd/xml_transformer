@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.transform.TransformerException;
@@ -32,5 +33,19 @@ class XslTransformationTest {
 
         // Assert.
         assertEquals(expectedStr, actualStr);
+    }
+
+    @Test
+    void throws_ifXslFileIsInvalid() {
+        // Arrange.
+        Path xmlFile = Paths.get("src", "test", "resources", "xsl_transformation", "invalid", "before_transformation.xml");
+        Path xslFile = Paths.get("src", "test", "resources", "xsl_transformation", "invalid", "transform.xsl");
+        Path outputFilePath = Paths.get("src", "test", "resources", "xsl_transformation", "invalid", "result.html");
+
+        // Act + assert.
+        XslTransformationService transformer = new XslTransformationService();
+        Assertions.assertThrows(TransformerException.class, () -> {
+            transformer.transform(xmlFile, xslFile, outputFilePath);
+        });
     }
 }
