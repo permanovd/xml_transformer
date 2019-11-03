@@ -1,6 +1,5 @@
 package com.permanovd.application;
 
-import com.permanovd.infrastructure.XmlTransformer;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -26,15 +25,8 @@ class TransformationServiceTest {
         Path outputFilePath = Paths.get("src", "test", "resources", "transformation", "valid", "result.xml");
 
         // Act.
-        XmlTransformer xmlTransformer = TransformationService
-                .builder()
-                .sourceFile(xmlFile)
-                .transformWith(xslFile)
-                .validateWith(xsdFile)
-                .outputTo(outputFilePath)
-                .get();
-
-        xmlTransformer.transform();
+        TransformationService transformationService = new TransformationService();
+        transformationService.validateAndTransform(xmlFile, xslFile, xsdFile, outputFilePath);
 
         String expectedStr = FileUtils.readFileToString(expectedXmlFile.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");
         String actualStr = FileUtils.readFileToString(outputFilePath.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");

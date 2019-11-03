@@ -25,27 +25,9 @@ public class XmlTransformer {
         this.output = output;
     }
 
-    XmlTransformer withSchema(Path schema) {
-        this.schema = schema;
-        return this;
-    }
-
-    XmlTransformer withTransformationConfig(Path transformationConfig) {
-        this.transformationConfig = transformationConfig;
-        return this;
-    }
-
-    public void transform() throws IOException, SAXException, TransformerException {
-        if (null != schema) {
-            validationService.validate(source.toFile(), schema.toFile());
-        }
-
-        if (null != transformationConfig) {
-            transformationService.transform(source, transformationConfig, output);
-        }
-
-        if (null != schema) {
-            validationService.validate(output.toFile(), schema.toFile());
-        }
+    public void validateAndTransform(Path schema, Path transformationConfig) throws IOException, SAXException, TransformerException {
+        validationService.validate(source.toFile(), schema.toFile());
+        transformationService.transform(source, transformationConfig, output);
+        validationService.validate(output.toFile(), schema.toFile());
     }
 }
