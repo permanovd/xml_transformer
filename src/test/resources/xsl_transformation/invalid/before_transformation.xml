@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+    <Customers>
+        <Customer CustomerID="GREAL">
+            <CompanyName>Great Lakes Food Market</CompanyName>
+            <ContactName>Howard Snyder</ContactName>
+            <ContactTitle>Marketing Manager</ContactTitle>
+            <Phone>(503) 555-7555</Phone>
+        </Customer>
+    </Customers>
+</Root>
