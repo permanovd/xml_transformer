@@ -3,3 +3,6 @@
 
 # Target dir.
 target
+
+# Logs.
+app.log
