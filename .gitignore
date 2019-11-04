@@ -1,0 +1,8 @@
+# Ide files.
+.idea
+
+# Target dir.
+target
+
+# Logs.
+app.log
