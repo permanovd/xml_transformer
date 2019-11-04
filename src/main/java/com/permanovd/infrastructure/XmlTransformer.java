@@ -11,23 +11,23 @@ public class XmlTransformer {
 
     private final XslTransformationService transformationService;
     private final XsdValidationService validationService;
-    private final File source;
-    private final File output;
+    private final File schema;
+    private final File transformationConfig;
     private Logger logger;
 
     XmlTransformer(XslTransformationService transformationService,
                    XsdValidationService validationService,
-                   File source,
-                   File output,
+                   File schema,
+                   File transformationConfig,
                    Logger logger) {
         this.transformationService = transformationService;
         this.validationService = validationService;
-        this.source = source;
-        this.output = output;
+        this.schema = schema;
+        this.transformationConfig = transformationConfig;
         this.logger = logger;
     }
 
-    public void validateAndTransform(File schema, File transformationConfig) throws InputFileValidationException, OutputFileValidationException, TransformerException {
+    public void validateAndTransform(File source, File output) throws InputFileValidationException, OutputFileValidationException, TransformerException {
         this.logger.info(String.format("Starting transformation of \"%s\" by \"%s\" schema and \"%s\" transformation.",
                 source.getName(), schema.getName(), transformationConfig.getName()));
         try {

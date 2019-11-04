@@ -5,7 +5,7 @@
     <groupId>com.permanovd</groupId>
     <artifactId>xml_transformer</artifactId>
     <packaging>jar</packaging>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>xml_transformer</name>
 
     <properties>
@@ -45,6 +45,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+                    <finalName>xml_transformer</finalName>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
