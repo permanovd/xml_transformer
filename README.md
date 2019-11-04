@@ -27,6 +27,13 @@ Coverage should be 100% or explained why it is not possible.
 In project root: 
 `java -jar xml_transformer.jar -s testSources/input.xml -o testSources/output.xml -sc testSources/schema.xsd -t testSources/transform.xsl`
 
+Options:
+
+* `s` - source (xml) file path.
+* `o` - output (xml) file path.
+* `sc` - schema (xsd) file path.
+* `t` - transform (xslt) file path.
+
 
 ### Coverage
 
@@ -53,7 +60,11 @@ public class Application {
 2. IoException on logger creation. Same as first, dont see any benefit from writing tests on that section.
 
 
-#### Test sources:
+### Logging
+
+Logs are dumped into `app.log` file in current working directory.
+
+### Test sources:
 
 Some xml, xsd files were taken from: 
 

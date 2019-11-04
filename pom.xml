@@ -5,7 +5,7 @@
     <groupId>com.permanovd</groupId>
     <artifactId>xml_transformer</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.1-RELEASE</version>
+    <version>1.0.2-RELEASE</version>
     <name>xml_transformer</name>
 
     <properties>
