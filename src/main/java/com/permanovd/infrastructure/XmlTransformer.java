@@ -3,31 +3,55 @@ package com.permanovd.infrastructure;
 import org.xml.sax.SAXException;
 
 import javax.xml.transform.TransformerException;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
+import java.util.logging.Logger;
 
 public class XmlTransformer {
 
     private final XslTransformationService transformationService;
     private final XsdValidationService validationService;
-    private final Path source;
-    private Path schema;
-    private Path transformationConfig;
-    private final Path output;
+    private final File source;
+    private final File output;
+    private Logger logger;
 
     XmlTransformer(XslTransformationService transformationService,
                    XsdValidationService validationService,
-                   Path source,
-                   Path output) {
+                   File source,
+                   File output,
+                   Logger logger) {
         this.transformationService = transformationService;
         this.validationService = validationService;
         this.source = source;
         this.output = output;
+        this.logger = logger;
     }
 
-    public void validateAndTransform(Path schema, Path transformationConfig) throws IOException, SAXException, TransformerException {
-        validationService.validate(source.toFile(), schema.toFile());
-        transformationService.transform(source, transformationConfig, output);
-        validationService.validate(output.toFile(), schema.toFile());
+    public void validateAndTransform(File schema, File transformationConfig) throws InputFileValidationException, OutputFileValidationException, TransformerException {
+        this.logger.info(String.format("Starting transformation of \"%s\" by \"%s\" schema and \"%s\" transformation.",
+                source.getName(), schema.getName(), transformationConfig.getName()));
+        try {
+            validationService.validate(source, schema);
+        } catch (SAXException | IOException e) {
+            this.logger.warning(String.format("Input validation failed for file %s.", source.getName()));
+            throw new InputFileValidationException(e);
+        }
+
+        try {
+            transformationService.transform(source, transformationConfig, output);
+        } catch (TransformerException e) {
+            this.logger.warning(String.format("Transformation failed for file %s.", source.getName()));
+            throw e;
+        }
+
+        try {
+            validationService.validate(output, schema);
+        } catch (SAXException | IOException e) {
+            this.logger.warning(String.format("Output validation failed for file %s.", source.getName()));
+            throw new OutputFileValidationException(e);
+        }
+
+        this.logger.info(String.format("Transformation of \"%s\" by \"%s\" schema and \"%s\" succeeded.",
+                source.getName(), schema.getName(), transformationConfig.getName()));
     }
 }

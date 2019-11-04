@@ -1,8 +1,9 @@
 package com.permanovd.application;
 
+import com.permanovd.infrastructure.InputFileValidationException;
+import com.permanovd.infrastructure.OutputFileValidationException;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TransformationServiceTest {
 
     @Test
-    void transformsFile_ifAllConditionsAreOk() throws IOException, TransformerException, SAXException {
+    void transformsFile_ifAllConditionsAreOk() throws IOException, TransformerException, OutputFileValidationException, InputFileValidationException {
         // Arrange.
         Path expectedXmlFile = Paths.get("src", "test", "resources", "transformation", "valid", "expected.xml");
 
@@ -26,7 +27,7 @@ class TransformationServiceTest {
 
         // Act.
         TransformationService transformationService = new TransformationService();
-        transformationService.validateAndTransform(xmlFile, xslFile, xsdFile, outputFilePath);
+        transformationService.validateAndTransform(xmlFile.toFile(), xslFile.toFile(), xsdFile.toFile(), outputFilePath.toFile());
 
         String expectedStr = FileUtils.readFileToString(expectedXmlFile.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");
         String actualStr = FileUtils.readFileToString(outputFilePath.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");
