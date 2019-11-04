@@ -25,7 +25,7 @@ Coverage should be 100% or explained why it is not possible.
 ### Run
 
 In project root: 
-`java -jar target/xml_transformer-0.1-SNAPSHOT.jar -s testSources/input.xml -o testSources/output.xml -sc testSources/schema.xsd -t testSources/transform.xsl`
+`java -jar xml_transformer.jar -s testSources/input.xml -o testSources/output.xml -sc testSources/schema.xsd -t testSources/transform.xsl`
 
 
 ### Coverage
