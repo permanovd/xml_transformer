@@ -9,7 +9,7 @@ public final class XmlTransformers {
     private XmlTransformers() {
     }
 
-    public static XmlTransformer create(File sourceFile, File outputFilePath) {
+    public static XmlTransformer create(File xsdFile, File xslFile) {
         // todo inject.
         XslTransformationService transformationService = new XslTransformationService();
         XsdValidationService validationService = new XsdValidationService();
@@ -31,8 +31,8 @@ public final class XmlTransformers {
         return new XmlTransformer(
                 transformationService,
                 validationService,
-                sourceFile,
-                outputFilePath,
+                xsdFile,
+                xslFile,
                 logger
         );
     }

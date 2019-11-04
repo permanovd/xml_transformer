@@ -12,7 +12,7 @@ import java.io.File;
 public class TransformationService {
 
     public void validateAndTransform(File xmlFile, File xslFile, File xsdFile, File output) throws TransformerException, OutputFileValidationException, InputFileValidationException {
-        XmlTransformer xmlTransformer = XmlTransformers.create(xmlFile, output);
-        xmlTransformer.validateAndTransform(xsdFile, xslFile);
+        XmlTransformer xmlTransformer = XmlTransformers.create(xsdFile, xslFile);
+        xmlTransformer.validateAndTransform(xmlFile, output);
     }
 }
