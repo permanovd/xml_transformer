@@ -26,10 +26,10 @@ class XslTransformationTest {
 
         // Act.
         XslTransformationService transformer = new XslTransformationService();
-        Path result = transformer.transform(xmlFile, xslFile, outputFilePath);
+        transformer.transform(xmlFile.toFile(), xslFile.toFile(), outputFilePath.toFile());
 
         String expectedStr = FileUtils.readFileToString(expectedXmlFile.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");
-        String actualStr = FileUtils.readFileToString(result.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");
+        String actualStr = FileUtils.readFileToString(outputFilePath.toFile(), StandardCharsets.UTF_8).replaceAll("\\s+", "");
 
         // Assert.
         assertEquals(expectedStr, actualStr);
@@ -45,7 +45,7 @@ class XslTransformationTest {
         // Act + assert.
         XslTransformationService transformer = new XslTransformationService();
         Assertions.assertThrows(TransformerException.class, () -> {
-            transformer.transform(xmlFile, xslFile, outputFilePath);
+            transformer.transform(xmlFile.toFile(), xslFile.toFile(), outputFilePath.toFile());
         });
     }
 }

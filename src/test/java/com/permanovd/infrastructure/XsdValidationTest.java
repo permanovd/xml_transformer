@@ -20,10 +20,10 @@ class XsdValidationTest {
         Path schemaFile = Paths.get("src", "test", "resources", "xsd_validation", "valid", "schema.xsd");
 
         // Act.
-        boolean result = validationService.validate(xmlFile.toFile(), schemaFile.toFile());
+        validationService.validate(xmlFile.toFile(), schemaFile.toFile());
 
-        // Assert.
-        assertTrue(result);
+        // Assert than no exceptions were thrown.
+        assertTrue(true);
     }
 
     @Test
